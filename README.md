@@ -1,4 +1,5 @@
 # Webhooks MCP
+[![smithery badge](https://smithery.ai/badge/webhooks_mcp)](https://smithery.ai/server/webhooks_mcp)
 
 Um servidor MCP (Model Context Protocol) para enviar requisições HTTP para webhooks com parâmetros dinâmicos.
 
@@ -13,6 +14,16 @@ Um servidor MCP (Model Context Protocol) para enviar requisições HTTP para web
 - ✅ Logs de requisição e resposta
 
 ## Instalação
+
+### Instalando via Smithery
+
+Para instalar webhook_mcp para Claude Desktop automaticamente via [Smithery](https://smithery.ai/server/webhook_mcp):
+
+```bash
+npx -y @smithery/cli install webhook_mcp --client claude
+```
+
+### Instalação Manual
 
 1. As dependências já estão instaladas. Para reinstalar se necessário:
 ```bash
