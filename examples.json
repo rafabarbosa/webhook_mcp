@@ -1,0 +1,179 @@
+{
+  "examples": [
+    {
+      "name": "Cadastro de usuário",
+      "description": "Envia dados de um novo usuário para um webhook",
+      "request": {
+        "url": "https://meuwebhook.com.br/usuarios",
+        "method": "POST",
+        "parameters": {
+          "nome": "Maria Silva",
+          "email": "maria@email.com",
+          "telefone": "11987654321",
+          "idade": 28,
+          "endereco": {
+            "rua": "Rua das Flores, 123",
+            "cidade": "São Paulo",
+            "cep": "01234-567"
+          },
+          "ativo": true,
+          "tags": [
+            "cliente",
+            "premium"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Busca com filtros",
+      "description": "Busca dados com parâmetros de filtro",
+      "request": {
+        "url": "https://api.exemplo.com/produtos",
+        "method": "GET",
+        "parameters": {
+          "categoria": "eletrônicos",
+          "preco_min": 100,
+          "preco_max": 1000,
+          "disponivel": true,
+          "ordenar": "preco_asc",
+          "limite": 20,
+          "pagina": 1
+        }
+      }
+    },
+    {
+      "name": "Atualização com autenticação",
+      "description": "Atualiza dados com header de autenticação",
+      "request": {
+        "url": "https://api.exemplo.com/perfil/123",
+        "method": "PUT",
+        "parameters": {
+          "nome": "João Santos",
+          "bio": "Desenvolvedor Full Stack",
+          "skills": [
+            "JavaScript",
+            "Python",
+            "React"
+          ],
+          "experiencia": 5
+        },
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          "X-API-Version": "v2",
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "name": "Webhook de notificação",
+      "description": "Envia notificação para sistema externo",
+      "request": {
+        "url": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
+        "method": "POST",
+        "parameters": {
+          "text": "Novo pedido recebido!",
+          "channel": "#vendas",
+          "username": "Sistema de Vendas",
+          "icon_emoji": ":shopping_cart:",
+          "attachments": [
+            {
+              "color": "good",
+              "fields": [
+                {
+                  "title": "Pedido",
+                  "value": "#12345",
+                  "short": true
+                },
+                {
+                  "title": "Valor",
+                  "value": "R$ 299,90",
+                  "short": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Integração com CRM",
+      "description": "Sincroniza lead com sistema CRM",
+      "request": {
+        "url": "https://api.crm.com/leads",
+        "method": "POST",
+        "parameters": {
+          "nome": "Ana Costa",
+          "email": "ana@empresa.com",
+          "telefone": "11999888777",
+          "empresa": "Tech Solutions Ltda",
+          "cargo": "Gerente de TI",
+          "origem": "website",
+          "interesse": "consultoria",
+          "orcamento": 50000,
+          "prazo": "3 meses",
+          "observacoes": "Interessada em migração para cloud"
+        },
+        "headers": {
+          "X-API-Key": "sua-api-key-aqui",
+          "X-Source": "webhook-mcp"
+        }
+      }
+    },
+    {
+      "name": "Webhook de pagamento",
+      "description": "Processa confirmação de pagamento",
+      "request": {
+        "url": "https://api.pagamentos.com/webhook/confirmacao",
+        "method": "POST",
+        "parameters": {
+          "transacao_id": "txn_1234567890",
+          "valor": 199.90,
+          "moeda": "BRL",
+          "status": "aprovado",
+          "metodo": "cartao_credito",
+          "cliente": {
+            "id": "cust_123",
+            "nome": "Carlos Oliveira",
+            "email": "carlos@email.com"
+          },
+          "produto": {
+            "id": "prod_456",
+            "nome": "Curso de Python",
+            "categoria": "educacao"
+          },
+          "timestamp": "2024-01-15T10:30:00Z"
+        },
+        "headers": {
+          "X-Webhook-Signature": "sha256=...",
+          "X-Event-Type": "payment.completed"
+        }
+      }
+    },
+    {
+      "name": "Exclusão de registro",
+      "description": "Remove um registro do sistema",
+      "request": {
+        "url": "https://api.exemplo.com/usuarios/456",
+        "method": "DELETE",
+        "headers": {
+          "Authorization": "Bearer token-admin",
+          "X-Reason": "Solicitação do usuário"
+        }
+      }
+    },
+    {
+      "name": "Webhook com timeout personalizado",
+      "description": "Requisição com timeout de 60 segundos",
+      "request": {
+        "url": "https://api-lenta.exemplo.com/processamento",
+        "method": "POST",
+        "parameters": {
+          "arquivo": "relatorio_mensal.pdf",
+          "formato": "excel",
+          "email_destino": "relatorios@empresa.com"
+        },
+        "timeout": 60000
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "webhooks": {
+      "command": "node",
+      "args": [
+        "/Users/rafabarbosa/Desktop/scripts/webhooks-mcp/dist/index.js"
+      ]
+    }
+  }
+}
