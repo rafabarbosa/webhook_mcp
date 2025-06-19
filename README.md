@@ -341,4 +341,22 @@ Você pode testar webhooks manualmente pelo terminal:
 npx ts-node src/cli.ts
 ```
 
-Siga os prompts para informar URL, método, parâmetros e headers. 
+Siga os prompts para informar URL, método, parâmetros e headers.
+
+## Retentativas Automáticas de Requisições
+
+O servidor MCP pode realizar retentativas automáticas em caso de falhas temporárias (timeout, erro de rede, erro 5xx).
+
+Configure as variáveis de ambiente:
+
+- `RETRY_ATTEMPTS`: número máximo de tentativas (padrão: 1)
+- `RETRY_BASE_DELAY_MS`: tempo base (em ms) para o backoff exponencial entre tentativas (padrão: 500)
+
+**Exemplo:**
+
+```bash
+export RETRY_ATTEMPTS=3
+export RETRY_BASE_DELAY_MS=1000
+```
+
+Com isso, ao ocorrer uma falha temporária, o MCP tentará novamente até o limite configurado, aguardando cada vez mais tempo entre as tentativas. 
