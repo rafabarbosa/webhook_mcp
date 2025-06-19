@@ -184,7 +184,7 @@ O servidor gera logs detalhados:
 - **Whitelist de URLs/domínios**: configure a variável de ambiente `WHITELIST_URLS` (separada por vírgula) para restringir os destinos permitidos. Exemplo:
 
 ```bash
-export WHITELIST_URLS="api.exemplo.com,https://hooks.slack.com"
+export WHITELIST_URLS="api.exemplo.com,meuwebhook.com.br,https://hooks.slack.com"
 ```
 
 Se não configurada, qualquer URL será permitida.
@@ -341,4 +341,25 @@ Você pode testar webhooks manualmente pelo terminal:
 npx ts-node src/cli.ts
 ```
 
-Siga os prompts para informar URL, método, parâmetros e headers. 
+Siga os prompts para informar URL, método, parâmetros e headers.
+
+## Whitelist de URLs/Domínios Permitidos
+
+Para aumentar a segurança em produção, defina a variável de ambiente `WHITELIST_URLS` com uma lista separada por vírgula dos domínios ou URLs permitidos. O servidor só aceitará requisições para URLs presentes nessa lista.
+
+**Exemplo de uso:**
+
+```bash
+export WHITELIST_URLS="api.exemplo.com,meuwebhook.com.br,https://hooks.slack.com"
+```
+
+- Se a variável não estiver definida, qualquer URL será permitida (modo aberto).
+- Para bloquear tudo exceto domínios/URLs específicos, defina a lista conforme desejado.
+
+**Exemplo de erro ao tentar enviar para URL não permitida:**
+
+```
+❌ URL não permitida pelo servidor (whitelist).
+
+Consulte o administrador para liberar o domínio ou URL desejada.
+``` 
