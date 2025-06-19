@@ -21,4 +21,24 @@ describe('Webhook MCP', () => {
     expect(response.status).toBe(200);
     expect(response.data.sucesso).toBe(true);
   });
+
+  it('deve lidar com erro de rede (mock)', async () => {
+    (axios as any).mockRejectedValue({
+      code: 'ECONNABORTED',
+      message: 'timeout',
+    });
+
+    try {
+      await axios({
+        method: 'POST',
+        url: 'https://exemplo.com/webhook',
+        data: { nome: 'Teste' },
+        timeout: 1,
+      });
+      // Se não lançar erro, falha o teste
+      fail('Deveria lançar erro de timeout');
+    } catch (error: any) {
+      expect(error.code).toBe('ECONNABORTED');
+    }
+  });
 }); 
