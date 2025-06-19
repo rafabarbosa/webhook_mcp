@@ -33,4 +33,22 @@ describe('Validação dos exemplos do examples.json', () => {
       expect(response.data).toHaveProperty('sucesso', true);
     });
   });
+
+  it('deve lidar com exemplo inválido (mock)', async () => {
+    (axios as any).mockRejectedValue({
+      response: { status: 400, data: { sucesso: false, erro: 'Parâmetro inválido' } },
+    });
+    const req = {
+      method: 'POST',
+      url: 'https://exemplo.com/webhook',
+      data: { nome: 123 }, // nome deveria ser string
+    };
+    try {
+      await axios(req);
+      fail('Deveria lançar erro de validação');
+    } catch (error: any) {
+      expect(error.response.status).toBe(400);
+      expect(error.response.data.sucesso).toBe(false);
+    }
+  });
 }); 
