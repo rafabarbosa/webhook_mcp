@@ -214,13 +214,27 @@ export LANG=en
 
 ```
 {
+  "isError": true,
   "content": [
     {
       "type": "text",
-      "text": "❌ Erro ao enviar webhook!\n\n**Erro:** Erro de validação dos parâmetros\n\n**Detalhes:**\n{...}"
+      "text": "❌ Erro ao enviar webhook!\n\n**Erro:** Erro de validação dos parâmetros\n\n**Detalhes:**\n{\n  \"errors\": [\n    {\n      \"path\": \"url\",\n      \"message\": \"URL deve ser válida\"\n    }\n  ]\n}"
     }
-  ],
-  "isError": true
+  ]
+}
+```
+
+- **Erro de URL não permitida:**
+
+```
+{
+  "isError": true,
+  "content": [
+    {
+      "type": "text",
+      "text": "❌ URL não permitida pelo servidor (whitelist).\n\nConsulte o administrador para liberar o domínio ou URL desejada."
+    }
+  ]
 }
 ```
 
@@ -228,27 +242,13 @@ export LANG=en
 
 ```
 {
+  "isError": true,
   "content": [
     {
       "type": "text",
-      "text": "❌ Erro ao enviar webhook!\n\n**Erro:** Erro HTTP: Request failed with status code 500\n\n**Detalhes:**\n{...}"
+      "text": "❌ Erro ao enviar webhook!\n\n**Erro:** Erro HTTP: Request failed with status code 500\n\n**Detalhes:**\n{\n  \"status\": 500,\n  \"statusText\": \"Internal Server Error\",\n  \"data\": {\n    \"erro\": \"Falha interna\"\n  }\n}"
     }
-  ],
-  "isError": true
-}
-```
-
-- **URL não permitida (whitelist):**
-
-```
-{
-  "content": [
-    {
-      "type": "text",
-      "text": "❌ URL não permitida pelo servidor (whitelist).\n\nConsulte o administrador para liberar o domínio ou URL desejada."
-    }
-  ],
-  "isError": true
+  ]
 }
 ```
 
@@ -302,6 +302,58 @@ Basta rodar `npm test` na raiz do projeto.
 **Como reportar um bug ou sugerir melhoria?**
 
 Abra uma issue no repositório do GitHub.
+
+## Dicas de Segurança para Produção
+
+- Sempre defina a variável `WHITELIST_URLS` para limitar os domínios permitidos.
+- Use HTTPS para proteger as comunicações.
+- Configure variáveis de ambiente sensíveis fora do código-fonte.
+- Utilize logs em nível adequado e monitore falhas.
+- Considere rodar o MCP em containers isolados (ex: Docker).
+
+## Exemplos de Respostas de Erro
+
+**Erro de validação de parâmetros:**
+
+```
+{
+  "isError": true,
+  "content": [
+    {
+      "type": "text",
+      "text": "❌ Erro ao enviar webhook!\n\n**Erro:** Erro de validação dos parâmetros\n\n**Detalhes:**\n{\n  \"errors\": [\n    {\n      \"path\": \"url\",\n      \"message\": \"URL deve ser válida\"\n    }\n  ]\n}"
+    }
+  ]
+}
+```
+
+**Erro de URL não permitida:**
+
+```
+{
+  "isError": true,
+  "content": [
+    {
+      "type": "text",
+      "text": "❌ URL não permitida pelo servidor (whitelist).\n\nConsulte o administrador para liberar o domínio ou URL desejada."
+    }
+  ]
+}
+```
+
+**Erro HTTP (exemplo 500):**
+
+```
+{
+  "isError": true,
+  "content": [
+    {
+      "type": "text",
+      "text": "❌ Erro ao enviar webhook!\n\n**Erro:** Erro HTTP: Request failed with status code 500\n\n**Detalhes:**\n{\n  \"status\": 500,\n  \"statusText\": \"Internal Server Error\",\n  \"data\": {\n    \"erro\": \"Falha interna\"\n  }\n}"
+    }
+  ]
+}
+```
 
 ## Próximos Passos
 
