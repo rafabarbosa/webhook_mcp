@@ -175,6 +175,33 @@ O servidor gera logs detalhados:
 - Respostas recebidas (status, tempo de resposta)
 - Erros detalhados com contexto
 
+## Sistema de Logs (Níveis Configuráveis)
+
+O servidor MCP possui um sistema de logs com níveis configuráveis:
+
+- `debug`: Mostra todos os logs detalhados (inclui info, warn e error)
+- `info`: Mostra logs informativos, avisos e erros
+- `warn`: Mostra apenas avisos e erros
+- `error`: Mostra apenas erros
+
+Defina o nível de log desejado usando a variável de ambiente `LOG_LEVEL`:
+
+```bash
+export LOG_LEVEL=debug
+```
+
+Por padrão, o nível é `info`.
+
+### Integração com sistemas externos
+
+Você pode redirecionar a saída dos logs para um arquivo ou sistema externo:
+
+```bash
+node dist/index.js > logs.txt 2>&1
+```
+
+Ou integrar com ferramentas como Logstash, Datadog, etc., usando redirecionamento ou agentes de coleta.
+
 ## Segurança
 
 - Validação rigorosa de entrada com Zod
